@@ -22,7 +22,7 @@ def direct(level, sz):
 
 
 def setting_nc(level, sz):
-    # splitting the rgb range for green
+    # splitting the rgb range for green color
     # into equal intervals for each level
     # setting the colour according
     # to the current level
