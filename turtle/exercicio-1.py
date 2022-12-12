@@ -36,7 +36,6 @@ def fiboPlot(N):
     
     square_a, square_b = Get_Next_Fibonacci_Number(square_a, square_b)
 
-    # Drawing the rest of the squares
     for i in range(1, N):
         x.backward(square_a * factor)
         x.right(90)
