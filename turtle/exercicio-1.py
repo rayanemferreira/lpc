@@ -29,12 +29,11 @@ def fiboPlot(N):
 
     square_a, square_b = Get_Next_Fibonacci_Number(a, b)
 
-    # Setting the colour of the plotting pen to blue
     x.pencolor("blue")
 
-    # Drawing the first square
+    
     Draw_A_Square(square_b, factor, 3)
-    # Proceeding in the Fibonacci Series
+    
     square_a, square_b = Get_Next_Fibonacci_Number(square_a, square_b)
 
     # Drawing the rest of the squares
@@ -44,16 +43,15 @@ def fiboPlot(N):
 
         Draw_A_Square(square_b, factor, 2)
 
-        # Proceeding in the Fibonacci Series
         square_a, square_b = Get_Next_Fibonacci_Number(square_a, square_b)
 
-    # Bringing the pen to starting point of the spiral plot
+   
     Bringing_The_Pen()
 
-    # Setting the colour of the plotting pen to red
+   
     x.pencolor("red")
 
-    # Fibonacci Spiral Plot
+  
     x.left(90)
     for i in range(N):
         print(b)
