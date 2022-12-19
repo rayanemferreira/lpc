@@ -191,7 +191,6 @@ while block_count:
                ball.ycor() <= i.ycor() + 5:
                 ball.dy *= -1
                 i.goto(1000, 1000)
-                print(i.color())
 
                 if (i.color()[0] == 'red'):
                     score += 7
