@@ -1,7 +1,7 @@
 import turtle
 import time
 import random
-# from playsound import playsound
+from playsound import playsound
 
 # Draw screen
 screen = turtle.Screen()
@@ -125,10 +125,10 @@ def paddle_right():
 # Collision with the wall
 def collision_wall():
     if ball.ycor() > 280:
-        # playsound("bounce.wav")
+        playsound("bounce.wav")
         ball.dy *= -1
     if ball.xcor() > 190 or ball.xcor() < -190:
-        # playsound("bounce.wav")
+        playsound("bounce.wav")
         ball.dx *= -1
 
 
@@ -138,7 +138,7 @@ def collision_paddle():
        paddle.xcor() + 24 > ball.xcor() > paddle.xcor() - 24:
         ball.sety(-240)
         ball.dy *= -1
-        # playsound("bounce.wav")
+        playsound("bounce.wav")
 
 
 # keyboard
@@ -167,7 +167,7 @@ while block_count:
         hud_life.clear()
         hud_life.write(f"{life}", align="center",
                        font=("Press Start 2P", 24, "normal"))
-        # playsound("bounce.wav")
+        playsound("bounce.wav")
         ball.goto(0, 0)
         ball.dy *= -1
 
@@ -182,7 +182,7 @@ while block_count:
         hud_life.clear()
         hud_life.write(f"{life}", align="center",
                        font=("Press Start 2P", 24, "normal"))
-        # playsound("bit bounce.wav")
+        playsound("bounce.wav")
 
     for i in block_list:
         if ball.xcor() + 10 >= i.xcor() - 10 and\
@@ -210,7 +210,7 @@ while block_count:
                 hud_life.clear()
                 hud_life.write(f"{life}", align="center",
                                font=("Press Start 2P", 24, "normal"))
-                # playsound("bit bounce.wav")
+                playsound("bounce.wav")
 
     if life == 0:
         screen.clear()
@@ -219,7 +219,7 @@ while block_count:
         hud_score.goto(0, 0)
         hud_score.write(f'GAME OVER\nScore: {score}', align='center',
                         font=("Press Start 2P", 24, "normal"))
-        # playsound("game over.wav")
+        playsound("game-over.wav")
         break
 
 turtle.mainloop()
