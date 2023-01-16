@@ -9,7 +9,7 @@ COLOR_WHITE = (255, 255, 255)
 # screen
 size = (1280, 720)
 screen = pygame.display.set_mode(size)
-pygame.display.set_caption("My Tank - PyGame Edition - 2023-15-01")
+pygame.display.set_caption("My Breakout - PyGame Edition - 2023-09-01")
 
 # score text cria a variável da pontuação dos jogadores
 score_font = pygame.font.Font("PressStart2P.ttf", 44)
@@ -49,7 +49,7 @@ pygame.mouse.set_visible(False)
 
 # ball
 BALL_DIAMETER = 8
-ball_player_1 = pygame.image.load("ball.png")
+ball = pygame.image.load("ball.png")
 ball_hit = 1
 ball_player_1_x = 800
 ball_player_1_y = 800
@@ -103,15 +103,13 @@ while game_loop:
         screen.fill(COLOR_BLACK)
 
         # ball collision with the wall
-        # verifica se a bola do player 1 bateu nas paredes
-        # parede de direita
+        # verifica se a bola bateu nas paredes
         if ball_player_1_x > 1280 - BORDER_WIDTH - BALL_DIAMETER:
             ball_player_1_x = 1280 - BORDER_WIDTH - BALL_DIAMETER
             ball_player_1_dx *= -1
             bounce_sound_effect.play()
             ball_hit = 1
             player_1_cont_vezes_que_a_bola_recocheteou += 1
-        # parede de esquerda
         elif ball_player_1_x <= BORDER_WIDTH:
             ball_player_1_x = BORDER_WIDTH
             ball_player_1_dx *= -1
@@ -130,15 +128,6 @@ while game_loop:
             ball_player_1_dy *= -1
             player_1_cont_vezes_que_a_bola_recocheteou += 1
 
-        # verifica se a bola do player 2 bateu no tank do player 1
-        if player_1_y + PLAYER_HEIGHT > ball_player_2_y > player_1_y - PLAYER_HEIGHT:
-            if player_1_x + PLAYER_WIDTH > ball_player_2_x > player_1_x - PLAYER_WIDTH:
-                lives -= 1
-                player_1_x, player_1_y = 100, 100
-                # faz a bola desaparecer
-
-                player_2_cont_vezes_que_a_bola_recocheteou = 5
-
       # faz a bola desaparecer
         if (player_1_cont_vezes_que_a_bola_recocheteou == 5):
             ball_player_1_x = 800
@@ -147,16 +136,24 @@ while game_loop:
             player_1_atirou = False
             scoring_sound_effect.play()
 
-      # ball collision with the wall
-        # verifica se a bola do player 2 bateu nas paredes
-        # parede de direita
+        # verifica se a bola bateu no tank
+        if player_1_y + PLAYER_HEIGHT > ball_player_2_y > player_1_y - PLAYER_HEIGHT:
+            if player_1_x + PLAYER_WIDTH > ball_player_2_x > player_1_x - PLAYER_WIDTH:
+                lives -= 1
+                player_1_x, player_1_y = 100, 100
+
+        # verifica se a bola bateu no tank
+        if player_2_y + PLAYER_HEIGHT > ball_player_1_y > player_2_y - PLAYER_HEIGHT:
+            if player_2_x + PLAYER_WIDTH > ball_player_1_x > player_2_x - PLAYER_WIDTH:
+                livesplayer_2 -= 1
+                player_2_x, player_2_y = 100, 100
+
         if ball_player_2_x > 1280 - BORDER_WIDTH - BALL_DIAMETER:
             ball_player_2_x = 1280 - BORDER_WIDTH - BALL_DIAMETER
             ball_player_2_dx *= -1
             bounce_sound_effect.play()
             ball_player_2_hit = 1
             player_2_cont_vezes_que_a_bola_recocheteou += 1
-        # parede de esquerda
         elif ball_player_2_x <= BORDER_WIDTH:
             ball_player_2_x = BORDER_WIDTH
             ball_player_2_dx *= -1
@@ -170,18 +167,11 @@ while game_loop:
                 ball_player_2_dy *= -1
                 ball_player_2_hit = 1
                 player_2_cont_vezes_que_a_bola_recocheteou += 1
-            # parede de baixo
+    # parede de baixo
             if ball_player_2_y > 700:
+
                 ball_player_2_dy *= -1
                 player_2_cont_vezes_que_a_bola_recocheteou += 1
-
-        # verifica se a bola do player 1 bateu no tank do player 2
-        if player_2_y + PLAYER_HEIGHT > ball_player_1_y > player_2_y - PLAYER_HEIGHT:
-            if player_2_x + PLAYER_WIDTH > ball_player_1_x > player_2_x - PLAYER_WIDTH:
-                livesplayer_2 -= 1
-                player_2_x, player_2_y = 100, 100
-                # faz a bola desaparecer
-                player_1_cont_vezes_que_a_bola_recocheteou = 5
 
         # faz a bola desaparecer
         if (player_2_cont_vezes_que_a_bola_recocheteou == 5):
@@ -226,8 +216,6 @@ while game_loop:
                 ball_player_1_x = player_1_x + 5
                 ball_player_1_y = player_1_y+15
 
-        # player_2 movement
-
         keys2 = {
             "up": pygame.K_w,
             "down": pygame.K_s,
@@ -260,6 +248,16 @@ while game_loop:
             ball_player_2_x = player_2_x + 50
             ball_player_2_y = player_2_y + 17
 
+        # força o paddle a ficar dentro do tabuleiro
+        # player_1 1 collides with right wall
+        # if player_y <= BORDER_WIDTH:
+        #     player_y = BORDER_WIDTH
+        # # player_1 1 collides with left wall
+        # elif player_y >= 1280-BORDER_WIDTH-PLAYER_WIDTH:
+        #     player_y = 1280-BORDER_WIDTH-PLAYER_WIDTH
+
+        # update score hud
+        # atualiza os textos de vidas e score
         score_text = score_font.render(
             "LIVES P1:" + str(lives) + "| LIVES P2:" + str(livesplayer_2),
             True, COLOR_WHITE, COLOR_BLACK)
@@ -276,7 +274,7 @@ while game_loop:
 
         # drawing objects
         # renderiza / desenha a bola os players e os blocos na tela
-        screen.blit(ball_player_1, (ball_player_1_x, ball_player_1_y))
+        screen.blit(ball, (ball_player_1_x, ball_player_1_y))
 
         screen.blit(ball_player_2, (ball_player_2_x, ball_player_2_y))
 
