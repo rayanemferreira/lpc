@@ -92,8 +92,8 @@ player_1_atirou = False
 player_2_atirou = False
 
 
-def create_zone(zone):
-    field = open(zone, 'r')
+def create_board(board):
+    field = open(board, 'r')
     global wall_list
     global not_wall_list
     wall_list = []
@@ -118,7 +118,7 @@ def block_pos(pos):
     return x, y
 
 
-blocks = create_zone('zones/warzone'+sys.argv[1]+".txt")
+blocks = create_board('boards/board'+sys.argv[1]+".txt")
 
 while game_loop:
 
