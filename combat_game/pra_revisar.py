@@ -1,5 +1,6 @@
 import math
 import pygame
+import sys
 
 pygame.init()
 
@@ -77,8 +78,8 @@ game_loop = True
 game_clock = pygame.time.Clock()
 
 # blocks cria uma lista com imagens dos blocos
-BLOCK_WIDTH = 40
-BLOCK_HEIGHT = 10
+BLOCK_WIDTH = 13
+BLOCK_HEIGHT = 20
 colors = [pygame.image.load("block" + str(i) + ".png") for i in range(4)]
 
 # calcula e retorna a coodenada
@@ -89,6 +90,36 @@ player_2_cont_vezes_que_a_bola_recocheteou = 0
 
 player_1_atirou = False
 player_2_atirou = False
+
+
+def create_zone(zone):
+    field = open(zone, 'r')
+    global wall_list
+    global not_wall_list
+    wall_list = []
+    not_wall_list = []
+    y = -20
+
+    for line in field:
+        x = -42.0
+        for block in line:
+            if block == '1':
+                wall_list.append(block_pos((x, y)))
+            elif block == '0':
+                not_wall_list.append((x, y))
+            x += 1
+        y += 1
+    return [wall_list]
+
+
+def block_pos(pos):
+    x = pos[0]*BLOCK_WIDTH+(1280-BLOCK_WIDTH*14)/2
+    y = 250-pos[1]*BLOCK_HEIGHT
+    return x, y
+
+
+blocks = create_zone('zones/warzone'+sys.argv[1]+".txt")
+
 while game_loop:
 
     # verifica se o jogo acabou
@@ -285,7 +316,9 @@ while game_loop:
         screen.blit(player_2, (player_2_x, player_2_y))
 
         screen.blit(score_text, score_text_rect)
-
+        for i in range(len(blocks)):
+            for block in blocks[i]:
+                screen.blit(colors[1], block)
     else:
         # drawing victory
         # mostra que o jogador venceu
