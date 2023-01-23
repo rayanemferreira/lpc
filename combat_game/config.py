@@ -31,4 +31,4 @@ block_height = 20
 border_width = 100
 
 # board
-board = '1'
+board = '3'
