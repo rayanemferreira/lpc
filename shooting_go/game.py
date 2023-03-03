@@ -15,7 +15,7 @@ class Game:
     def __init__(self):
 
         self.ball = Ball(625, 363, 50, 50)
-        self.play_end_game = True
+        self.willPlayEndSound = True
         self.game_loop = True
         self.clock = pygame.time.Clock()
 
@@ -27,9 +27,9 @@ class Game:
         self.tank_2 = Tank(180, self.player2_rect, "sprites/nave-2.png", GREEN)
 
     def playEndSound(self):
-        if (self.play_end_game):
+        if (self.willPlayEndSound):
             end_game_song.play()
-            self.play_end_game = False
+            self.willPlayEndSound = False
 
     def showVictoryText(self, player_num):
         self.victory_font = pygame.font.Font('assets/PressStart2P.ttf', 44)
