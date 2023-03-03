@@ -22,6 +22,11 @@ touch_limit = 4
 bullet_limit = 3
 speed_ball = 5
 border = 25
+pygame.mixer.init()
+
+score_song = pygame.mixer.Sound('assets/score.mp3')
+shot_song = pygame.mixer.Sound('assets/shot.wav')
+end_game_song = pygame.mixer.Sound('assets/soccer_crowd.mp3')
 
 pygame.display.set_caption("Shooting.GO")
 font = pygame.font.Font("sprites/PressStart2P.ttf", 40)

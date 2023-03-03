@@ -88,3 +88,6 @@ class Ball:
     def restart(self):
         self.x, self.y = self.original[0], self.original[1]
         self.dx = self.dy = 0
+
+    def hide(self):
+        self.x = 99999
