@@ -1,6 +1,6 @@
 from config import *
 import math
-
+from arena import get_zona
 
 def load_images(sprite, ang, w, h, xp, yp, image):
     sprite.image = pygame.image.load(image)
@@ -27,8 +27,7 @@ def tank1_collision_objects(rect, angle):
                 rect.x + 20 * math.cos(math.radians(-angle)),
                 rect.y + 20 * math.sin(math.radians(-angle)), "sprites/collision_object.png")
     # if detection_collision(collision_1) and collision_1.rect.collidelist(get_zona()) == -1:
-    if detection_collision(collision_1):
-
+    if detection_collision(collision_1) and collision_1.rect.collidelist(get_zona()) == -1:
         per_1 = True
     else:
         per_1 = False
@@ -43,8 +42,7 @@ def tank2_collision_objects(rect, angle):
 
     # collision player 2 with objects
     # if detection_collision(collision_2) and collision_2.rect.collidelist(get_zona()) == -1:
-    if detection_collision(collision_2):
-
+    if detection_collision(collision_2) and collision_2.rect.collidelist(get_zona()) == -1:
         per_2 = True
     else:
         per_2 = False

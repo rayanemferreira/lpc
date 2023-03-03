@@ -1,6 +1,11 @@
 import pygame
 from robots import Robots
 
+def get_zona():
+
+    list_aux = [pygame.Rect(20, 157, 180, 10), pygame.Rect(20, 617, 180, 10), pygame.Rect(200, 167, 10, 440),
+                pygame.Rect(1100, 157, 180, 10), pygame.Rect(1100, 617, 180, 10), pygame.Rect(1090, 167, 10, 440)]
+    return list_aux
 
 class Arena:
     def __init__(self, num_arena, screen):
@@ -21,6 +26,10 @@ class Arena:
 
         list_reacts.append(camp_player_1)
         list_reacts.append(camp_player_2)
+
+        # player´s zone
+        pygame.draw.rect(self.screen, "#ffffff", (20, 167, 180, 440), 5)
+        pygame.draw.rect(self.screen, "#ffffff", (1100, 167, 180, 440), 5)
 
         screen_1 = pygame.draw.rect(self.screen, "#ffffff", (0, 50, 1300, 25))
         list_reacts.append(screen_1)
