@@ -1,0 +1,102 @@
+@font-face {
+    font-family: Conv_robotron-2084;
+    src: url(../fonts/robotron-2084.eot) format("embedded-opentype"), url(../fonts/robotron-2084.woff) format("woff"), url(../fonts/robotron-2084.ttf) format("truetype"), url(../fonts/robotron-2084.svg) format("svg");
+    font-weight: 400;
+    font-style: normal;
+}
+#inputcmd,
+body {
+    background-color: #333;
+    color: #0f0;
+    font-family: "andale mono", "monotype.com", monaco, "courier new", courier, monospace;
+}
+#terminal-window {
+    padding: 10px;
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background-color: #111;
+    overflow: hidden;
+}
+#terminal-window:before {
+    content: "";
+    z-index: 4010;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: linear-gradient(#444 50%, #111 50%);
+    background-size: 100% 4px;
+    background-repeat: repeat-y;
+    opacity: 0.14;
+    box-shadow: inset 0 0 1px 1px rgba(0, 0, 0, 0.8);
+    animation: 5s linear infinite pulse;
+}
+#cursor {
+    color: #0f0;
+    box-sizing: border-box;
+    border-left: 0.5em solid;
+}
+.blink {
+    animation: 6s steps(13, end) infinite typing, 1s step-end infinite blinking;
+}
+.scanlines {
+    z-index: 4100;
+}
+.hide {
+    display: none;
+}
+
+#inputcmd {
+    background-color: #111;
+    border: 1px;
+    font-size: 1em;
+    color: transparent;
+    text-shadow: 0 0 0 #0f0;
+}
+#inputcmd:focus {
+    outline: 0;
+}
+@keyframes pulse {
+    0% {
+        transform: scale(1.001);
+        opacity: 0.14;
+    }
+    8% {
+        transform: scale(1);
+        opacity: 0.13;
+    }
+    15% {
+        transform: scale(1.004);
+        opacity: 0.14;
+    }
+    30% {
+        transform: scale(1.002);
+        opacity: 0.11;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 0.14;
+    }
+}
+@keyframes vline {
+    0% {
+        top: 0;
+    }
+    100% {
+        top: 100%;
+    }
+}
+@keyframes blinking {
+    from,
+    to {
+        border-color: transparent;
+    }
+    50% {
+        border-color: green;
+    }
+}

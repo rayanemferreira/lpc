@@ -7,7 +7,7 @@ COLOR_BLACK = (0, 0, 0)
 COLOR_WHITE = (255, 255, 255)
 
 # screen
-size = (1280, 720)
+size =  screen.blit(score_text
 screen = pygame.display.set_mode(size)
 pygame.display.set_caption("My Breakout - PyGame Edition - 2023-09-01")
 
@@ -20,7 +20,7 @@ score_text_rect.center = (380, 50)
 # victory text
 victory_font = pygame.font.Font('assets/PressStart2P.ttf', 100)
 victory_text = victory_font.render('YOU LOSE', True, COLOR_WHITE, COLOR_BLACK)
-victory_text_rect = score_text.get_rect()
+victory_text_rect =     .get_rect()
 victory_text_rect.center = (450, 300)
 
 # sound effects

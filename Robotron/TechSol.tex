@@ -1,0 +1,284 @@
+This chapter is split into a few sections. The first, is the file tree, and shows what all the files I use are, and how they are structured into the folder. I will then go on to show and explain some very key points in the code, however it is important to note that these snippets, as standalone code wouldnt function, as such, the content of all files of my NEA are also listed here. I will begin the sub section with all the code with a contents containing all the code listings for the NEA, and their page number, path, etc. Finally, the end of this section will be how the code is actually run. It is worth explaining, as it is not an entirely simple process.
+
+\section{Folder Layout}
+\dirtree{%
+.1 Robotron2084.
+.2 Game Code.
+.3 levels.
+.4 levels.csv.
+.3 audio.
+.4 change.mp3.
+.4 intro.mp3.
+.4 shoot.mp3.
+.3 characters\_module.
+.4 \_\_init\_\_.py.
+.4 characters.py.
+.4 enemy.py.
+.4 humans.py.
+.4 player.py.
+.5 sprites.py.
+.3 constatnts.
+.4 \_\_init\_\_.py.
+.4 colors.py.
+.4 const.py.
+.3 controller.py.
+.3 decorations.
+.4 \_\_init\_\_.py.
+.4 border.py.
+.4 text.py
+.3 event.py
+.3 menu.py.
+.3 model.py.
+.3 objects.
+.4 \_\_init\_\_.py.
+.4 bullet.py.
+.3 font.
+.4 robotron2084.ttf.
+.3 event.py.
+.3 event.py.
+.3 gameplay.py.
+.3 main.py.
+.3 sprites.
+.4 2084.png.
+.4 daddies.png.
+.4 electrode.png.
+.4 grunt.png.
+.4 hulk.png.
+.4 mikeys.png.
+.4 mommies.png.
+.4 player.png.
+.3 statemachine.py.
+.3 states.py.
+.3 views.py.
+.2 Website Code.
+.3 app.py.
+.3 static.
+.4 css.
+.5 styles.css.
+.4 fonts.
+.5 robotron2084.ttf.
+.4 img.
+.5 icon.png.
+.4 js.
+.5 script.min.js.
+.3 templates.
+.4 error.html.
+.4 index.html.
+.3 leaderboard.db.
+.2 requirements.txt.
+}
+
+\section{Key Sections}
+\subsection{Boids}
+Boids was talked about in design, here is the implementation:
+
+First step is creating the function and and setting variables
+\lstinputlisting[language=Python, firstline=121, lastline=131]{"Game Code/gameplay.py"}
+
+Now we start looping through each grunt (each member of the flock), and checking if it is 'in view' of the current (x) grunt, to do this, calculate the distance between the points and check less than 60 (eg, a grunt has a sight radius of 60) 
+\lstinputlisting[language=Python, firstline=132, lastline=138]{"Game Code/gameplay.py"}
+
+If the boid is in sight then we update our values
+\lstinputlisting[language=Python, firstline=139, lastline=144]{"Game Code/gameplay.py"}
+
+then update these values to reflect the centre of the flock etc
+\lstinputlisting[language=Python, firstline=145, lastline=150]{"Game Code/gameplay.py"}
+
+these last lines calculate and return the final v of the boid (given as $\Delta x, \Delta y$), which can be added to the current position for the new position.
+\lstinputlisting[language=Python, firstline=149, lastline=155]{"Game Code/gameplay.py"}
+
+Now we use some functional type programming to efficiently find and update all the positions
+\lstinputlisting[language=Python, firstline=156, lastline=165]{"Game Code/gameplay.py"}
+
+
+
+\lstlistoflistings
+
+\section{Website Code}
+
+\subsection{app.py}
+This file is used for the website server, and programs in for all the API routes, its well commented with docstrings for each route, and explains in detail, so would be redundant for me to explain them further here.
+\lstinputlisting[language=Python]{"Website Code/app.py"}
+
+\subsection{index.html}
+This file is the main template and html file. The file was initially created with the help of bootstrap studio, but was heavily edited with the need to add in the jinja templaeing language - so that the high score values can be shown. The website links to other parts of the project, and a source for more information. 
+\lstinputlisting[language=HTML]{"Website Code/templates/index.html"}
+
+\subsection{error.html}
+This file is only shown when there is a 500 (internal server) error. This is hopefully never shown, but is ready when needed.
+\lstinputlisting[language=HTML]{"Website Code/templates/error.html"}
+
+\subsection{styles.css}
+This CSS is used to style the above pages
+\lstinputlisting[language=HTML]{"Website Code/static/css/styles.css"}
+
+
+\section{Game Code}
+
+\subsection{main.py}
+The 'main' python file, the one that is used to load in all the other necessary classes, and is used to actually run the game. It is also designed to handle the sys arguments, so that the game can be run in the test mode. This was a heavily used feature in development, as it gave a blank canvas to allow me to test new features rapidly, or write very small tests on tiny code sections.
+\lstinputlisting[language=Python]{"Game Code/main.py"}
+
+\subsection{eventmanager.py}
+The code used to handle events and transmitting them, rather simplistic, simply sending out events when needed, to all listeners.
+\lstinputlisting[language=Python]{"Game Code/eventmanager.py"}
+
+\subsection{statemachine.py}
+This is a very basic one, basically just a stack of states which will get visited, in the order of the stack. This controls that stack, and is the implimentation for a stack which was talked about in the design section.
+\lstinputlisting[language=Python]{"Game Code/statemachine.py"}
+
+\subsection{model.py}
+This file houses the Model section of the MVC, and, once again seems rather simple, after all, its main job is just to emit the ticks after set up.
+\lstinputlisting[language=Python]{"Game Code/model.py"}
+
+\subsection{views.py}
+The View for the MVC, this file controls what is seen on screen, and will direct all the components. This could have been a huge file, but the functions required to be called by this were instead moved into gameplay.py and menu.py - whilst these could have been used as methods of the view class, that made little sense to me, as this implementation leads to shorter, easier to understand files.
+\lstinputlisting[language=Python]{"Game Code/views.py"}
+
+\subsection{controller.py}
+This is the Controller, and is responsible for handeling all the inputs into the game, such as keystrokes and mouse movements / clicks. 
+\lstinputlisting[language=Python]{"Game Code/controller.py"}
+
+\subsection{event.py}
+A file filled with the events classes, including the super event class which everything inherits from.
+\lstinputlisting[language=Python]{"Game Code/event.py"}
+
+\subsection{states.py}
+A file of states, which are just constants reallly
+\lstinputlisting[language=Python]{"Game Code/states.py"}
+
+\subsection{menu.py}
+This file is all the functions required to render the menu, and other admin pages of the game.
+\lstinputlisting[language=Python]{"Game Code/menu.py"}
+
+\subsection{gameplay.py}
+The file needed to play the actual game. This file contains the game code itself, and all the functions which are used and called by the view in order to render the game itself.
+\lstinputlisting[language=Python]{"Game Code/gameplay.py"}
+
+\subsection{APIinteractions.py}
+A set of helper functions to make interacting with my API much easier
+\lstinputlisting[language=Python]{"Game Code/APIinteractions.py"}
+
+\subsection{characters\_module}
+\subsubsection{characters.py}\\
+A file for all the characters to extend from, as some underlying functionality is the same, like changing the way they face depending on their movements.
+\lstinputlisting[language=Python]{"Game Code/characters_module/characters.py"}
+
+\subsubsection{enemy.py}\\
+The enemies classes, along with the base enemy class to extend them all from.
+\lstinputlisting[language=Python]{"Game Code/characters_module/enemy.py"}
+
+\subsubsection{humans.py}\\
+The class for the mommies, daddies and mikeys to inherit from.
+\lstinputlisting[language=Python]{"Game Code/characters_module/humans.py"}
+
+\subsubsection{player.py}\\
+The player is the main character, and isnt very different from all the other classes.
+\lstinputlisting[language=Python]{"Game Code/characters_module/player.py"}
+
+
+\subsubsection{sprites.py}\\
+A bunch of helper functions which help load all the files in and stretch images, preparing them to be used as sprite images.
+\lstinputlisting[language=Python]{"Game Code/characters_module/sprites.py"}
+
+\subsection{constants}
+A bunch of constants which are just for ease of use, makes it way easier to access colours, but also things about the game
+\subsubsection{colors.py}\\
+A file full of colors, both hex and rgb.
+
+\lstinputlisting[language=Python]{"Game Code/constants/colors.py"}
+
+\subsubsection{const.py}\\
+Other constatnts, which are needed for the game, and make it easier to adjust.
+\lstinputlisting[language=Python]{"Game Code/constants/const.py"}
+
+\subsection{decorations}
+\subsubsection{border.py}\\
+The flashing colour border on the main gameplay screen
+\lstinputlisting[language=Python]{"Game Code/decorations/border.py"}
+\subsubsection{text.py}\\
+A helper function to display all the text in the menu, simplifies all the code there for me.
+\lstinputlisting[language=Python]{"Game Code/decorations/text.py"}
+\subsection{objects}
+\subsubsection{bullet.py}\\
+The bullet object which is what gets shot by the player, initialised each time
+\lstinputlisting[language=Python]{"Game Code/objects/bullet.py"}
+
+\section{Other Files}
+\begin{figure}[H]
+  \includegraphics[width=0.8\linewidth]{Game Code/sprites/2084.png}
+  \centering
+  \caption{2084.png}
+  \label{fig:HCI5}
+\end{figure}
+
+\begin{figure}[H]
+  \includegraphics[width=1\linewidth]{Game Code/sprites/daddies.png}
+  \centering
+  \caption{daddies.png}
+  \label{fig:HCI5}
+\end{figure}
+
+\begin{figure}[H]
+  \includegraphics[width=1\linewidth]{Game Code/sprites/mommies.png}
+  \centering
+  \caption{mommies.png}
+  \label{fig:HCI5}
+\end{figure}
+
+\begin{figure}[H]
+  \includegraphics[width=1\linewidth]{Game Code/sprites/mikeys.png}
+  \centering
+  \caption{mikeys.png}
+  \label{fig:HCI5}
+\end{figure}
+
+
+\begin{figure}[H]
+  \includegraphics[width=0.5\linewidth]{Game Code/sprites/electrode.png}
+  \centering
+  \caption{electrode.png}
+  \label{fig:HCI5}
+\end{figure}
+
+\begin{figure}[H]
+  \includegraphics[width=1\linewidth]{Game Code/sprites/grunt.png}
+  \centering
+  \caption{grunt.png}
+  \label{fig:HCI5}
+\end{figure}
+
+\begin{figure}[H]
+  \includegraphics[width=1\linewidth]{Game Code/sprites/hulk.png}
+  \centering
+  \caption{hulk.png}
+  \label{fig:HCI5}
+\end{figure}
+
+\subsubsection{requirements.txt}\\
+The file containing all the modules used
+\lstinputlisting[]{"requirements.txt"}
+
+\begin{table}[H]
+\begin{tabular}{|l|l|l|l|l|l|l|l|l|l|}
+\hline
+\rowcolor[HTML]{C0C0C0} 
+level & Grunt & Electrode & Hulk & Brain & Spheroids & Quarks & Mommies & Daddies & Mikeys \\ \hline
+1     & 10    & 0         & 0    & 0     & 0         & 0      & 0       & 0       & 0      \\ \hline
+2     & 17    & 15        & 5    & 0     & 1         & 0      & 1       & 1       & 1      \\ \hline
+3     & 22    & 25        & 6    & 0     & 3         & 0      & 2       & 1       & 2      \\ \hline
+4     & 34    & 25        & 7    & 0     & 4         & 0      & 2       & 2       & 2      \\ \hline
+5     & 20    & 20        & 0    & 15    & 1         & 0      & 15      & 2       & 1      \\ \hline
+... &... &... &... &... &... &... &... &... &... \\ \hline
+39    & 80    & 0         & 6    & 0     & 5         & 1      & 3       & 3       & 3      \\ \hline
+40    & 30    & 15        & 2    & 25    & 1         & 1      & 10      & 10      & 10     \\ \hline
+\end{tabular}
+\caption{levels.csv}
+\end{table}
+
+\section{How to run}
+Running the code is simple. The webserver needs to be started, and then the game is run. Ideally, the website code would be deployed to a URL, but this seemed unnecessary for the current state the project is in. 
+
+The set up is important - make sure requirements.txt is installed, with pip install -r requirements.txt
+
+Then, first run app.py in Website Code, and then main.py in Game Code (it is important to note that this has been tested and developed in python 3.9, but should be compatible back to about 3.8.5).

@@ -1,4 +1,3 @@
-import pygame
 from collision import collision_ball
 from tank import Tank
 from config import *
@@ -6,6 +5,7 @@ from score import Score
 from ball import Ball
 import math
 from config import score_song, shot_song, end_game_song
+
 pygame.init()
 
 
@@ -25,18 +25,19 @@ class Game:
         self.bullets = []
         self.tank_1 = Tank(0, self.player1_rect, "sprites/nave-1.png", RED)
         self.tank_2 = Tank(180, self.player2_rect, "sprites/nave-2.png", GREEN)
+        self.victory_font = pygame.font.Font('assets/PressStart2P.ttf', 44)
+        self.victory_text = self.victory_font.render('', True, WHITE, BLACK)
+        self.victory_text_rect = self.victory_text.get_rect()
 
     def playEndSound(self):
-        if (self.willPlayEndSound):
+        if self.willPlayEndSound:
             end_game_song.play()
             self.willPlayEndSound = False
 
     def showVictoryText(self, player_num):
-        self.victory_font = pygame.font.Font('assets/PressStart2P.ttf', 44)
-        self.victory_text = self.victory_font.render('', True, WHITE, BLACK)
-        self.victory_text_rect = self.victory_text.get_rect()
         self.victory_text_rect.center = (700, 300)
         Score.center = (550, 400)
+
         victory_text = self.victory_font.render('P{} WINS!'.format(player_num), True, WHITE, BLACK)
         screen.fill(BLACK)
         screen.blit(victory_text, self.victory_text_rect)
@@ -69,7 +70,7 @@ class Game:
                         self.bullets.append(self.tank_2.shot_bullet())
                         shot_song.play()
 
-            if (self.score_a == 5 or self.score_b == 5):
+            if self.score_a == 5 or self.score_b == 5:
                 self.finalizeGame()
 
             else:

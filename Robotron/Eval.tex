@@ -1,0 +1,68 @@
+
+Overall, I think I was very successful in my project. I worked on it over the space of many months, and am very proud of the result. I think it is probably my favourite project, it has allowed me to discover many new technologies, approaches and methods. I have not only enjoyed working on it, but think that the end result almost perfectly matches what I wanted originally. Having spoken to 2 reviewers, I have found that other people also agree. \\
+
+One student enjoyed the game, commenting on how it was very fast paced, and thought the implementation was perfect. The possible improvement comment was to add different difficulty levels, thinking about this, I can think of a few possible implementations. One would be to view the levels.csv as a ratio of enemies, more than a definite number. With this, with this, a difficulty multiplier could be used to set the difficulty. However, I think there is a better solution: Have multiple CSV's, and also have different constants, allowing, for example, grunts to move faster. This means there can be lots of variation in difficulties, and lots of different settings. I really like the idea of implementing this - and plan on doing it in the future.\\
+
+Another student had similar ideas, but also thought an improvement would be to use a controller to allow the dual stick shooter to really come to life. This is somewhat simple on the surface, as pygame has a feature to allow this, so it would be a great demonstration of the MVC's modularity. The also has some further details, as it would allow me to move in more than 8 directions - I could move (and shoot) in the true angle of the stick. This bring some complexity with the fact that the velocity still needs to be a constant, so would require lots more trigonometry to calculate a xy movement vector.\\
+
+This table of objectives shows how well I managed to meet all the objectives that were set for the project.
+\begin{longtable}{|p{0.3\linewidth}|p{0.1\linewidth}|p{0.6\linewidth}|}
+\hline
+\rowcolor[HTML]{C0C0C0} 
+Objective & Met? & Comments \\ \hline
+\endhead
+%
+{\ul \textbf{1 Game Objectives}} &  &  \\ \hline
+\textbf{1.1 Main (hero) character objectives} &  &  \\ \hline
+1.1.1 Character can be displayed & Y & Player is shown, this one was quite simple \\ \hline
+1.1.2 Character can move in all 8 directions & Y & Yes, this works, player moves with WASD, holding 2 will allow the player to move diagonally \\ \hline
+1.1.3 Character faces in correct direction & Y & As a player presses a WASD key the direction the sprite faces is changed as required. \\ \hline
+1.1.4 Characters movement is animated & Y & As a player moves, they "walk" \\ \hline
+1.1.5 Character is bounded to window & Y & Player can't move outside of the window, probably could have allowed them to get closer to the border though \\ \hline
+1.1.6 Character can shoot in 8 directions & Y & IJKL, and like moving, holding 2 goes in the diagonal \\ \hline
+1.1.7 Player is invincible on load of level & Y & Player gets a few ticks of invincibility \\ \hline
+\textbf{1.2 Enemy character objectives (for each enemy type - Electrodes, Grunts and Hunks)} &  &  \\ \hline
+1.2.1 Enemies can be displayed & Y & Enemies are displayed, based on the amount in the levels.csv file \\ \hline
+1.2.2 Enemies can move & Y & Enemies have an interface which can be used to move them \\ \hline
+1.2.3 Enemy faces correct direction & Y & Every tick updates the direction, ensures they face in the correct direction. works as expected, could however have added a way for them to move diagonally and animate that way (for now just faces either way) \\ \hline
+1.2.4 Enemies movement is animated & Y & Yes, grunts and hulks animate as they walk \\ \hline
+1.2.5 Enemy are bounded to window & Y & Just like players, these could have pushed closer to the window border I guess \\ \hline
+1.2.6 Enemy kills player when touching & Y & Players die from touching the bounding box yes, however for electrodes this is kind of an issue, as they aren't a box shape - there wasn't an easy fix for this. \\ \hline
+\textbf{1.2.7 Specific enemy functionality} &  &  \\ \hline
+1.2.7.1 Electrodes are randomly spread around the page & Y & Uses random numbers to spread them, could have used a generator which forces more of an even distribution, but they end up quite well distributed anyway. \\ \hline
+1.2.7.2 Grunts flock around player & Y & Implementation of this isn't ideal but works well enough for this project. If I had wanted to add some more complexity, it would have been interesting to use a "sight" which will only allow the grunt to see within a certain space - so if the player was out of range they would be unable to move to them, for example. \\ \hline
+1.2.7.3 Hunks slow down when shot & Y & Hunks have 2 speeds, and whilst they are shot they have an attribute changed so they move at a slower rate. \\ \hline
+\textbf{1.3 Menu objectives} &  &  \\ \hline
+1.3.1 Logo is shown and animated & Y & Logo animates, close to how the original did, but would have looked better sliced up and moving as a "wave" - rather than linearly shrinking. \\ \hline
+1.3.2 Display static text & Y & All text is shown, and rather well in terms of the implementation \\ \hline
+1.3.3 Display animated text & Y & The flashing text flashes as I wanted it to, using random colours \\ \hline
+1.3.4 Display and allow input for options & Y & By pressing keys and using the mouse, the user can input into the program. \\ \hline
+1.3.5 Allow for login and sign up & Y & Users login and sign up, and a token is stored to maintain the log in when the program is stopped. \\ \hline
+\textbf{1.4 Extras objectives (additional features)} &  &  \\ \hline
+1.4.1 Flashing border & Y & Border flashes random colours around the screen - I even implemented a score and life counter on this \\ \hline
+1.4.2 Random colour load screen & Y & This is the first screen shown, random coloured squares, hard to make it wrong \\ \hline
+1.4.3 ”All tests” screen & Y & Again, a really basic screen \\ \hline
+1.4.4 Inter—level animation & Y & Not as close to the original game as I would have liked, but looks cool none the less \\ \hline
+\textbf{1.4.5 Sounds} &  &  \\ \hline
+1.4.5.1 For shooting & Y & Taken and isolated as well as possible \\ \hline
+1.4.5.2 For start up & Y & Taken and isolated as well as possible \\ \hline
+1.4.5.3 For level change & Y & Taken and isolated as well as possible \\ \hline
+{\ul \textbf{2 Website Objectives}} &  &  \\ \hline
+2.1 Displays high score board of top 10 players & Y & Shows the scores \\ \hline
+2.2 Website animated and looks like the high score board on original game & Y & Animates on load, window border flashes up \\ \hline
+2.3 Have an error page, informs user something went wrong & Y & On a 500 error, the error page shows saying that something went wrong \\ \hline
+\textbf{2.4 API Goals (a route to...)} &  &  \\ \hline
+2.4.1 Return top scores & Y & This API didn't end up being used, but was still implemented none the less \\ \hline
+2.4.2 Allow for sign up & Y & API route works perfectly, returns errors when needed \\ \hline
+2.4.3 Allow for log in & Y & API route works perfectly, returns errors when needed \\ \hline
+2.4.4 Generate tokens for login & Y & Tokens are easily generated and stored on the client \\ \hline
+2.4.5 Upload scores and validate with token & Y & Score uploading works as hoped, is perfect, uses tokens to validate, so no need to log in or sign up \\ \hline
+\end{longtable}
+
+To conclude, working on this project has been months of work, but is very much concluding here. After all the work it is very rewarding to be able to look back on the year of work put into it, and the result is ideal and exactly what I had hoped for, back when I started it. I met all the objectives set, and whilst the system could be improved, for example, by allowing for a better connected API (allowing users to look up a database of scores and results for example). As such I would deem the project a success, and thank the reader for taking the time to read my report into it.
+
+\begin{figure}[H]
+    
+  \includegraphics[width=.4\textwidth,right]{Figures/sign.png}
+  
+\end{figure}

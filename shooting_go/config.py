@@ -4,7 +4,7 @@ pygame.font.init()
 
 sc_width = 1300
 sc_height = 750
-screen = pygame.display.set_mode((sc_width, sc_height), pygame.FULLSCREEN)
+screen = pygame.display.set_mode((sc_width, sc_height))
 
 RED = (255, 0, 0)
 GREEN = (0, 255, 0)

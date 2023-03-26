@@ -1,0 +1,74 @@
+
+This section is focused mostly around the testing table below. It relies on 4 videos, uploaded to youtube, linked here:
+\\
+- [1] - \url{https://youtu.be/AYuTGnz5iWs}\\
+- [2] - \url{https://youtu.be/YLJfJYOn0VU}\\
+- [3] - \url{https://youtu.be/l1ZDcFLS0k4}\\
+- [4] - \url{https://youtu.be/yuTypBxsMr4}\\
+
+In the proof section [1] is used to denote video 1, [2] for video 2, etc, with time stamps. 
+
+The testing shown here is only a small sample of the endless testing that went on through the iterative design process. It is worth watching the videos in their entirety to get a sense for the gameplay.
+\begin{longtable}{|p{0.2\linewidth}|p{0.15\linewidth}|p{0.15\linewidth}|p{0.1\linewidth}|p{0.1\linewidth}|p{0.1\linewidth}|p{0.1\linewidth}|}
+\hline
+\rowcolor[HTML]{C0C0C0} 
+Objective & Type of test data (Erroneous, Boundary, Normal) & Test Data & Expected Result & Actual result & Success (Y/N) & Proof \\ \hline
+\endhead
+%
+\textbf{1 Game Tests} &  &  &  &  &  &  \\ \hline
+1.1 Main (hero) character objectives &  &  &  &  &  &  \\ \hline
+1.1.1 Character can be displayed & N & NA & Player gets shown & Player gets shown & Y & 0:53 - 0:57 {[}1{]} \\ \hline
+1.1.2 Character can move in all 8 directions & N & W, A, S, D & Player moves in correct direction for given input & Player moves in correct direction & Y & 0:53 - 0:57 {[}1{]} \\ \hline
+1.1.2 Character can move in all 8 directions & N & WA, WD, AS, SD & Player moves in correct direction for given input & Player moves in correct direction & Y & 0:06:0:10 {[}2{]} \\ \hline
+1.1.3 Character faces in correct direction & N & W, S, A, D & Sprite should rotate & Sprite rotated to face correct direction & Y & 0:53 - 0:57 {[}1{]} \\ \hline
+1.1.4 Characters movement is animated & N & W & Sprite should move through costumes & Sprite animated & Y & 0:53 - 0:57 {[}1{]} \\ \hline
+1.1.5 Character is bounded to window & B & W, A, S, D - try to move beyond wall & Sprite shouldn’t move through the wall & Sprite is bounded to border, slightly earlier than desired & Y, but with some issue & 0:53 - 0:57 {[}1{]} \\ \hline
+1.1.6 Character can shoot in 8 directions & N & W, A, S, D & Player shoots in correct direction for given input & Player shoots in correct direction & Y & 1:05 - 1:12 {[}3{]} \\ \hline
+1.1.6 Character can shoot in 8 directions & N & WA, WD, AS, SD & Player shoots in correct direction for given input & Player shoots in correct direction & Y & 1:05 - 1:12 {[}3{]} \\ \hline
+1.1.7 Player is invincible on load of level & B & W, A, S, D - try to run to enemy & Player doesn’t die instantly & Player doesn’t die instantly, but does die, maybe slightly too soon & Y, but with some issue & 1:18 {[}3{]} \\ \hline
+1.2 Enemy character objectives (for each enemy type - Electrodes, Grunts and Hunks) &  &  &  &  &  &  \\ \hline
+1.2.1 Enemies can be displayed & N & NA & Enemies shown & Enemies shown & Y & 0:53 - 0:57 {[}1{]} \\ \hline
+1.2.2 Enemies can move & N & NA & Enemies move & Enemies move & Y & 0:53 - 0:57 {[}1{]} \\ \hline
+1.2.3 Enemy faces correct direction & N & NA & Enemies rotate to face correct direction & Enemies rotate to face correct direction & Y & 0:10-0:15 {[}2{]} \\ \hline
+1.2.4 Enemies movement is animated & N & NA & Enemies animated & Enemies animated & Y & 0:53 - 0:57 {[}1{]} \\ \hline
+1.2.5 Enemy are bounded to window & N & NA & Enemies can’t walk beyond wall boundary & Enemies stopped at wall & Y & 0:15 - 0:17 {[}2{]} \\ \hline
+1.2.6 Enemy kills player when touching & N & W, A, S, D into enemy & Player dies & Player dies & Y & 0:54-0:56 {[}1{]} \\ \hline
+1.2.7 Specific enemy functionality &  &  &  &  &  &  \\ \hline
+1.2.7.1 Electrodes are randomly spread around the page & N & NA & Electrodes are all spread out & Electrodes are all spread out & Y & 1:00 - 1:04 {[}1{]} \\ \hline
+1.2.7.2 Grunts flock around player & N & W, A, S, D player tries to run away from grunt & Grunts flock towards player & Grunts flock towards player & Y & 0:50 - 1:00 {[}1{]} \\ \hline
+1.2.7.3 Hunks slow down when shot & N & I, J, K, L shoot hulk, see if it slows & Hulk slows down & Hulk doesn’t noticeably down & N & 0:27-0:35 {[}2{]} \\ \hline
+1.3 Menu objectives &  &  &  &  &  &  \\ \hline
+1.3.1 Logo is shown and animated & N & NA & Logo animates onto screen & Logo animates onto screen & Y & 0:03 - 0:07 {[}1{]} \\ \hline
+1.3.2 Display static text & N & NA & Text ends up on screen & Text ends up on screen & Y & 0:07 - 0:08 {[}1{]} \\ \hline
+1.3.3 Display animated text & N & NA & Text ends up on screen & Text ends up on screen & Y & 0:07 - 0:08 {[}1{]} \\ \hline
+1.3.4 Display and allow input for options & N & {[}space{]} & Will start game & Game starts & Y & 0:40-0:45 {[}1{]} \\ \hline
+1.3.4 Display and allow input for options & N & {[}enter{]} & Will go to login & Login page shown & Y & 0:10-0:13 {[}1{]} \\ \hline
+1.3.4 Display and allow input for options & E & {[}B{]} & Nothing happens & Nothing happened & Y & 0:10-0:11 {[}1{]} \\ \hline
+1.3.4 Display and allow input for options & E & {[}a{]} & Nothing happens & Nothing happened & Y & 0:10-0:11 {[}1{]} \\ \hline
+1.3.5 Allow for login and sign up & E & Sign up. Username as ‘tester123’ password as ‘password123’, ‘password’ for confirm password, ‘tes’ as initials & User not signed up, does allow sign up. Boxes go red, can’t be signed up. Incorrect message shown. & Boxes go red, can’t be signed up. Incorrect message shown. & Y & 0:10-0:15 {[}3{]} \\ \hline
+1.3.5 Allow for login and sign up & N & Sign up. Username as ‘tester123’ password as ‘password123’, same for confirm password, ‘tes’ as initials & User signed up, returned to menu & User signed up, returned to menu & Y & 0:16-0:35 {[}1{]} \\ \hline
+1.3.5 Allow for login and sign up & E & Log In. Username as ‘tester123’ password as ‘password12’, & User not logged in, incorrect message shown & User not logged in, incorrect message shown & Y & 0:30-0:35 {[}3{]} and 0:50-0:55 {[}3{]} \\ \hline
+1.3.5 Allow for login and sign up & N & Log In. Username as ‘tester123’ password as ‘password123’, & User logged in, returned to menu & User logged in, returned to menu & Y & 0:54 - 0:58 {[}3{]} \\ \hline
+1.4 Extras objectives (additional features) &  &  &  &  &  &  \\ \hline
+1.4.1 Flashing border & N & NA & Border flashes & Border flashes & Y & 0:53 - 0:57 {[}1{]} \\ \hline
+1.4.2 Random colour load screen & N & NA & Screen shown & Screen shown & Y & 0:00-0:02 {[}1{]} \\ \hline
+1.4.3 ”All tests” screen & N & NA & Screen shown & Screen shown & Y & 0:02-0:03 {[}1{]} \\ \hline
+1.4.4 Inter—level animation & N & NA & Animation shown & Animation shown & Y & 0:57-1:00 {[}1{]} \\ \hline
+1.4.5 Sounds &  &  &  &  &  &  \\ \hline
+1.4.5.1 For shooting & N & NA & Sound played & Sound played & Y & 1:00 - 1:04 {[}1{]} \\ \hline
+1.4.5.2 For start up & N & NA & Sound played & Sound played & Y & 0:00-0:10 {[}1{]} \\ \hline
+1.4.5.3 For level change & N & NA & Sound played & Sound played & Y & 0:45-0:50 {[}1{]} \\ \hline
+\textbf{2 Website Tests} &  &  &  &  &  &  \\ \hline
+2.1 Displays high score board of top 10 players & N & NA & Scores shown & Scores shown & Y & {[}4{]} \\ \hline
+2.2 Website animated and looks like the high score board on original game & N & NA & Website is animated & Website is animated & Y & 0:03 - 0:05 {[}4{]} \\ \hline
+2.3 Have an error page, informs user something went wrong & N & NA & Page shown & Page shown & Y & NA \\ \hline
+2.4 API Goals (a route to...) &  &  &  &  &  &  \\ \hline
+2.4.1 Return top scores & N & NA & Returned & Returned & Y & NA \\ \hline
+2.4.2 Allow for sign up & N & “test12345”, “password123”, “JAM” & Return ‘success’ & Return ‘success’ & Y & NA \\ \hline
+2.4.3 Allow for log in & N & “test12345”, “password123” & Return token & Return token & Y & NA \\ \hline
+2.4.3 Allow for log in & E & “test12345”, “password13” & Return password error & Return password error & Y & NA \\ \hline
+2.4.4 Generate tokens for login & N & “test12345”, “password123” & Return token & Return token & Y & NA \\ \hline
+2.4.4 Generate tokens for login & E & “test12345”, “password13” & Return password error & Return password error & Y & NA \\ \hline
+2.4.5 Upload scores and validate with token & N & userID, “2000”, token & Return ‘success’ & Return ‘success’ & Y & NA \\ \hline
+2.4.5 Upload scores and validate with token & E & userID, “2000”, ‘1’ (incorrect token) & Return password error & Return password error & Y & NA \\ \hline
+\end{longtable}

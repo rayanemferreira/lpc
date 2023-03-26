@@ -3,14 +3,14 @@ import time
 import random
 from playsound import playsound
 
-# Draw screen
+# cria a tela
 screen = turtle.Screen()
 screen.title("Breakout")
 screen.bgcolor("black")
 screen.setup(width=450, height=650)
 screen.tracer(0)
 
-# Draw paddle
+# desenha o padle
 paddle = turtle.Turtle()
 paddle.speed(0)
 paddle.shape("square")
@@ -19,7 +19,7 @@ paddle.shapesize(stretch_wid=0.5, stretch_len=2)
 paddle.penup()
 paddle.goto(0, -250)
 
-# Draw ball
+# desenha a bola
 ball = turtle.Turtle()
 ball.speed(0)
 ball.shape("square")
@@ -183,7 +183,7 @@ while block_count:
         hud_life.write(f"{life}", align="center",
                        font=("Press Start 2P", 24, "normal"))
         playsound("bounce.wav")
-
+#
     for i in block_list:
         if ball.xcor() + 10 >= i.xcor() - 10 and\
            ball.xcor() - 10 <= i.xcor() + 10:
